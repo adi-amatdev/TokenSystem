@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Flask Project</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/styles.css') }}"
+        />
+        {% block head%}{% endblock%}
+    </head>
+    <body>
+        <!-- <h1>Welcome to My Flask Project</h1>
+        <p>
+            This is a simple Flask application serving HTML, CSS, and JavaScript
+            files.
+        </p>
+        <button onclick="myFunction()">Click Me</button>
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script> -->
+        {%block body%}{%endblock%}
+    </body>
+</html>
