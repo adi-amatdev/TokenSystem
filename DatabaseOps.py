@@ -43,14 +43,14 @@ class DatabaseOps:
             if conn:
                 conn.close()
 
-    def insertUsagePlan(self,customerName:str, usagePlanID:str, burstLimit:int, rateLimit:int, quotaLimit:int, period:str,timeStamp:datetime, activated:bool):
+    def insertUsagePlan(self,batchName:str, usagePlanID:str, burstLimit:int, rateLimit:int, quotaLimit:int, period:str,timeStamp:datetime, activated:bool):
         conn, cur = self.connectDB()
 
 
         # Define the SQL INSERT statement
         sql = """
             INSERT INTO aams_tokens.usagePlan (
-                customer_name, usage_plan_id, burst_limit, rate_limit, quota_limit, period, created_time_stamp, activated
+                batch_id, usage_plan_id, burst_limit, rate_limit, quota_limit, period, created_time_stamp, activated
             ) VALUES (
                 %s, %s, %s, %s, %s, %s, %s, %s
             )
@@ -58,7 +58,7 @@ class DatabaseOps:
 
         # Execute the INSERT statement
         preparedStmt = cur.mogrify(sql,(
-            customerName, usagePlanID, burstLimit, rateLimit, quotaLimit, period, timeStamp, activated
+            batchName, usagePlanID, burstLimit, rateLimit, quotaLimit, period, timeStamp, activated
         ))
 
         try:
@@ -130,17 +130,17 @@ class DatabaseOps:
                 conn.close()
 
 
-    def customerExists(self,customerName:str):
+    def batchExists(self,batchName:str):
         conn, cur = self.connectDB()
 
         try:
             # Define the SQL SELECT statement
             sql = """
-                SELECT 1 FROM aams_tokens.usagePlan WHERE customer_name = %s
+                SELECT 1 FROM aams_tokens.usagePlan WHERE batch_id = %s
             """
 
             # Execute the SELECT statement
-            cur.execute(sql, (customerName,))
+            cur.execute(sql, (batchName,))
 
             # Fetch one record
             result = cur.fetchone()
@@ -148,7 +148,7 @@ class DatabaseOps:
             return result is not None
 
         except Exception as error:
-            print("Error checking customer existence:", error)
+            print("Error checking batch existence:", error)
             return False
 
         finally:
@@ -231,7 +231,7 @@ class DatabaseOps:
         try:
             # Define SQL statement to fetch all macIds and their corresponding activated values
             sql = """
-            SELECT customer_name, usage_plan_id
+            SELECT batch_id, usage_plan_id
             FROM aams_tokens.usageplan;
             """
 
@@ -245,7 +245,7 @@ class DatabaseOps:
             return results
 
         except (Exception, psycopg2.Error) as error:
-            print("Error while fetching Customer Names and Usage Plan IDs:", error)
+            print("Error while fetching Batch Names and Usage Plan IDs:", error)
             return None
 
         finally:

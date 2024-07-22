@@ -140,11 +140,11 @@ class UsagePlanManager:
     def __init__(self) -> None:
         pass
 
-    def createUsagePlanHandler(self, name, description, burstLimit, rateLimit, quotaLimit, period):
-        if databaseOpsManager.customerExists(name):
+    def createUsagePlanHandler(self, batchName, description, burstLimit, rateLimit, quotaLimit, period):
+        if databaseOpsManager.batchExists(batchName):
             return {
                 "status": 400,
-                "message":"Customer already exists"
+                "message":"Batch name  already exists"
             }
 
         validPeriods = ['DAY', 'WEEK', 'MONTH']
@@ -170,10 +170,10 @@ class UsagePlanManager:
             'period': period
         }
 
-        resp =  createUsagePlan(name, description, apiStages, throttleSettings, quotaSettings)
+        resp =  createUsagePlan(batchName, description, apiStages, throttleSettings, quotaSettings)
         if resp['ResponseMetadata']['HTTPStatusCode'] == 201:
             upi = resp['id']
-            databaseOpsManager.insertUsagePlan(name, upi, burstLimit, rateLimit, quotaLimit, period,datetime.now(), activated=True)
+            databaseOpsManager.insertUsagePlan(batchName, upi, burstLimit, rateLimit, quotaLimit, period,datetime.now(), activated=True)
             return {
                 "status" : 200,
                 "message": "Usage Plan Created "

@@ -102,12 +102,10 @@ def deleteUser(username):
 def createSingleToken():
     data = request.get_json()
     macId = data.get('macId',None)
-    upi = data.get('upi,None')
+    upi = data.get('upi',None)
     if  not macId or not upi:
         return jsonify({"Error": "macId and upi are required"}), 400
 
-    macId = data['macId']
-    upi = data['upi']
     resp = tokenManager.createTokenHandler(macId, upi)
     if resp['status']== 200:
         return jsonify({"message":resp['message']}),200
@@ -118,9 +116,10 @@ def createSingleToken():
 @app.route('/delete_token/', methods=['DELETE'])
 def deleteSingleToken():
     data = request.get_json()
-    if 'macId' not in data or not data:
+    macId = data.get('macId',None)
+
+    if 'macId' not in data or not macId:
         return jsonify({"Error":"macId required"}),400
-    macId = data['macId']
     resp = tokenManager.deleteTokenHandler(macId)
     if resp['status'] == 200:
         return jsonify({"message":resp['message']})
@@ -206,7 +205,7 @@ def deleteTokensBulk():
 @app.route('/sensor_fetch',methods = ['GET'])
 def sensorFetch():
     data = request.get_json()
-    macId = data['macId']
+    macId = data.get('macId',None)
     resp = tokenManager.sensorFetchHandler(macId)
     if resp['status'] == 200:
         return jsonify(resp['token']),200
@@ -229,14 +228,14 @@ def createUsagePlan():
     data = request.get_json()
     if not data:
         return jsonify({"Error":"No details provided"}),400
-    name = data['name']
-    description = data['description']
-    burstLimit = data['burst_limit']
-    rateLimit = data['rate_limit']
-    quotaLimit = data['quota_limit']
-    period = data['period']
+    batchName = data.get('name',None)
+    description = data.get('description',None)
+    burstLimit = data.get('burst_limit',None)
+    rateLimit = data.get('rate_limit',None)
+    quotaLimit = data.get('quota_limit',None)
+    period = data.get('period',None)
 
-    resp = usagePlanManager.createUsagePlanHandler(name,description,burstLimit,rateLimit,quotaLimit,period)
+    resp = usagePlanManager.createUsagePlanHandler(batchName,description,burstLimit,rateLimit,quotaLimit,period)
     if resp['status'] == 200:
         return jsonify({"Success":f"{resp['message']}"}),200
 
