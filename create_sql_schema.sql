@@ -41,7 +41,7 @@ GRANT INSERT, SELECT ON aams_tokens.usageplan TO demo_user;
 CREATE TABLE aams_tokens.users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(50) UNIQUE NOT NULL,
-  password VARCHAR(60) NOT NULL,
+  password TEXT NOT NULL,
   role VARCHAR(10) NOT NULL
 );
 GRANT INSERT, SELECT, UPDATE, DELETE ON aams_tokens.users TO demo_user;
