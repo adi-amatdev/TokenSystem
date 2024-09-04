@@ -1,4 +1,3 @@
-Here is a Markdown documentation for the `usageplan.py` file:
 
 ```markdown
 # `usageplan.py`
