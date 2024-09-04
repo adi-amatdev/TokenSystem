@@ -1,4 +1,3 @@
-
 # `tokenFuncs.py`
 
 This script provides functions to manage API keys in AWS API Gateway. It allows you to create, associate, and delete API keys, as well as link them to a usage plan.
@@ -109,20 +108,3 @@ This function deletes an API key based on its name.
 ```python
 success = deleteToken(macId="Device1")
 ```
-
-#### Output
-
-If the API key is deleted successfully, you will see the following output:
-
-```
-API Key 'Device1' deleted successfully.
-```
-
-In case of an error, the script will print the error message.
-
-## License
-
-This code is provided as-is without any warranty. You are free to use and modify it according to your needs.
-```
-
-This documentation explains how to use the various functions within the `api_key_manager.py` script to manage API keys in AWS API Gateway.
