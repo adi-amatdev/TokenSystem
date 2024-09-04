@@ -244,7 +244,7 @@ All endpoints return a JSON response with an appropriate HTTP status code. The r
 
 - Ensure that JWT tokens are kept secure and not exposed to unauthorized users.
 - All sensitive data, like passwords, should be hashed before storage. (done by Werkzueg , and already implemented).
-- Cross-Origin Resource Sharing (CORS) is enabled with ``, which can be adjusted based on the deployment environment.
+- Cross-Origin Resource Sharing (CORS) can be adjusted based on the deployment environment.
 
 ## Running the Application
 
