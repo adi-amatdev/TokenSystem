@@ -1,48 +1,139 @@
-## SQL Code Documentation
+### PostgreSQL Setup Documentation
 
-### Purpose
-This SQL code sets up a PostgreSQL database environment for managing sensor tokens, usage plans, and user accounts. It creates a new database, a user role, and schemas for organizing the data.
+This documentation outlines the steps to set up a PostgreSQL database for managing tokens, usage plans, and user authentication. The database schema is structured under a schema named `aams_tokens`, with tables to store token information, usage plans, and user credentials.
 
-### Breakdown
+#### 1. Database and Role Creation
 
-#### Database and User Setup
-* **CREATE DATABASE sensorTokens:** Creates a new database named "sensorTokens".
-* **CREATE ROLE demo_user WITH LOGIN PASSWORD 'demoPass123!';:** Creates a new user role named "demo_user" with the password "demoPass123!".
-* **GRANT CONNECT ON DATABASE sensorTokens TO demo_user;:** Grants the "demo_user" role the right to connect to the "sensorTokens" database.
+- **Create Database:**
+  ```sql
+  CREATE DATABASE sensorTokens;
+  ```
+  This command creates a new database named `sensorTokens`.
 
-#### Schema Creation
-* **CREATE SCHEMA aams_tokens AUTHORIZATION demo_user;:** Creates a new schema named "aams_tokens" under the ownership of the "demo_user" role.
-* **GRANT USAGE ON SCHEMA aams_tokens TO demo_user;:** Grants the "demo_user" role the right to use the "aams_tokens" schema.
+- **Create Role:**
+  ```sql
+  CREATE ROLE demo_user WITH LOGIN PASSWORD 'demoPass123!';
+  ```
+  This command creates a role named `demo_user` with login capability and sets the password to `'demoPass123!'`.
 
-#### Table Definitions
+- **Grant Database Connection Permission:**
+  ```sql
+  GRANT CONNECT ON DATABASE sensorTokens TO demo_user;
+  ```
+  This command grants the `demo_user` role permission to connect to the `sensorTokens` database.
 
-##### `tokenInfo` Table
-* **macId:** Primary key, uniquely identifies a sensor device.
-* **enabled:** Indicates whether the token is active or disabled.
-* **usage_plan_id:** Foreign key referencing the usage plan for the token.
-* **api_key_value:** The API key associated with the token.
-* **created_time_stamp:** Timestamp of token creation.
-* **activated:** Indicates whether the token has been activated.
+#### 2. Schema Setup
 
-##### `usagePlan` Table
-* **batch_id:** Primary key, uniquely identifies a batch of usage plans.
-* **usage_plan_id:** Identifier for the usage plan.
-* **burstLimit:** The maximum number of requests allowed within a specific time window.
-* **rate_limit:** The maximum number of requests allowed per time unit.
-* **quota_limit:** The total number of requests allowed within a given period.
-* **period:** The time period for which the quota applies (e.g., "hour", "day").
-* **created_time_stamp:** Timestamp of usage plan creation.
-* **activated:** Indicates whether the usage plan is active.
+- **Create Schema:**
+  ```sql
+  CREATE SCHEMA aams_tokens AUTHORIZATION demo_user;
+  ```
+  This command creates a new schema named `aams_tokens` within the `sensorTokens` database and authorizes `demo_user` as the owner.
 
-##### `users` Table
-* **id:** Primary key, auto-incrementing integer.
-* **username:** Unique username for the user.
-* **password:** Hashed password for the user.
-* **role:** Role or permission level of the user.
+- **Grant Schema Usage Permission:**
+  ```sql
+  GRANT USAGE ON SCHEMA aams_tokens TO demo_user;
+  ```
+  This command grants `demo_user` the ability to use the `aams_tokens` schema.
 
-### Additional Notes
-* **\d schema_name.table_name:** Used to describe the structure of a specific table.
-* **\dt:** Lists all tables in the current database.
-* **\dn:** Lists all schemas in the current database.
+#### 3. Tokens Schema DDL
 
-This SQL code provides a foundation for managing sensor tokens, usage plans, and user accounts in a PostgreSQL database. You can further customize and extend it based on your specific requirements.
+- **Create `tokenInfo` Table:**
+  ```sql
+  CREATE TABLE aams_tokens.tokenInfo (
+      macId VARCHAR(17) PRIMARY KEY,
+      enabled BOOLEAN,
+      usage_plan_id VARCHAR(6),
+      api_key_value TEXT,
+      created_time_stamp TIMESTAMP,
+      activated BIGINT
+  );
+  ```
+  This command creates the `tokenInfo` table within the `aams_tokens` schema, with columns to store:
+  - `macId`: MAC address (Primary Key)
+  - `enabled`: Status of the token (Boolean)
+  - `usage_plan_id`: ID of the associated usage plan (String)
+  - `api_key_value`: API key value (Text)
+  - `created_time_stamp`: Timestamp of token creation (Timestamp)
+  - `activated`: Activation count (BigInt)
+
+- **Grant Table Permissions:**
+  ```sql
+  GRANT INSERT, SELECT, UPDATE, DELETE ON aams_tokens.tokeninfo TO demo_user;
+  ```
+  This command grants `demo_user` the ability to perform `INSERT`, `SELECT`, `UPDATE`, and `DELETE` operations on the `tokenInfo` table.
+
+#### 4. Usage Plans Schema DDL
+
+- **Create `usagePlan` Table:**
+  ```sql
+  CREATE TABLE aams_tokens.usagePlan (
+      batch_id VARCHAR(30) PRIMARY KEY,
+      usage_plan_id VARCHAR(6),
+      burstLimit BIGINT,
+      rate_limit BIGINT,
+      quota_limit BIGINT,
+      period CHAR(10),
+      created_time_stamp TIMESTAMP,
+      activated BOOLEAN
+  );
+  ```
+  This command creates the `usagePlan` table within the `aams_tokens` schema, with columns to store:
+  - `batch_id`: Batch identifier (Primary Key)
+  - `usage_plan_id`: Usage plan ID (String)
+  - `burstLimit`: Burst limit (BigInt)
+  - `rate_limit`: Rate limit (BigInt)
+  - `quota_limit`: Quota limit (BigInt)
+  - `period`: Period duration (Char)
+  - `created_time_stamp`: Timestamp of plan creation (Timestamp)
+  - `activated`: Activation status (Boolean)
+
+- **Grant Table Permissions:**
+  ```sql
+  GRANT INSERT, SELECT ON aams_tokens.usageplan TO demo_user;
+  ```
+  This command grants `demo_user` the ability to perform `INSERT` and `SELECT` operations on the `usagePlan` table.
+
+#### 5. User Login Schema DDL
+
+- **Create `users` Table:**
+  ```sql
+  CREATE TABLE aams_tokens.users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    role VARCHAR(10) NOT NULL
+  );
+  ```
+  This command creates the `users` table within the `aams_tokens` schema, with columns to store:
+  - `id`: Unique identifier (Primary Key, Auto-incremented)
+  - `username`: Username (Unique, Not Null)
+  - `password`: User password (Not Null, Assumed to be hashed)
+  - `role`: User role (String, Not Null)
+
+- **Grant Table Permissions:**
+  ```sql
+  GRANT INSERT, SELECT, UPDATE, DELETE ON aams_tokens.users TO demo_user;
+  GRANT USAGE, SELECT ON SEQUENCE aams_tokens.users_id_seq TO demo_user;
+  ```
+  These commands grant `demo_user` the ability to perform `INSERT`, `SELECT`, `UPDATE`, and `DELETE` operations on the `users` table, as well as permission to use and select from the `users_id_seq` sequence for auto-incremented IDs.
+
+#### 6. Additional Commands
+
+- **Describe Tables:**
+  ```sql
+  \d schema_name.table_name
+  ```
+  This command is used to describe the structure of a specific table.
+
+- **List Tables:**
+  ```sql
+  \dt
+  ```
+  This command lists all tables in the current schema.
+
+- **List Schemas:**
+  ```sql
+  \dn
+  ```
+  This command lists all schemas in the current database.
