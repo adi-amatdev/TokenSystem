@@ -3,6 +3,8 @@
 ## Description
 The TokenSystem project manages tokens and handles them efficiently. It includes functionalities for creating users, managing token information, and defining usage plans. The project is built using Flask for the backend, with JWT authentication for secure user access.
 
+![Basic layout](https://whimsical.com/basic-layout-XeXWuXQMivfx9vaTpdJysM)
+
 ## Table of Contents
 1. Installation
 2. Usage
