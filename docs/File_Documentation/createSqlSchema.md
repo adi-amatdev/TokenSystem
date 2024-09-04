@@ -1,4 +1,3 @@
-### PostgreSQL Setup Documentation
 
 This documentation outlines the steps to set up a PostgreSQL database for managing tokens, usage plans, and user authentication. The database schema is structured under a schema named `aams_tokens`, with tables to store token information, usage plans, and user credentials.
 
