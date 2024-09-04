@@ -1,4 +1,4 @@
-### Handler Class Documentation for: `TokenManager`, `UsagePlanManager`, and `UserManager`
+### Documentation for: `TokenManager`, `UsagePlanManager`, and `UserManager`
 
 This documentation outlines the implementation of the `TokenManager`, `UsagePlanManager`, and `UserManager` classes used for managing tokens, usage plans, and user authentication in a cloud-based environment. The classes utilize functions from `tokenFuncs`, `usagePlan`, and `DatabaseOps` modules to interact with the backend services.
 
@@ -21,6 +21,13 @@ load_dotenv()
     - `APIID`: The API ID for usage plans.
     - `STAGE`: The stage of the API.
 - The above will be available in `AWS API GATEWAY` console, under the concerened REST API.
+    - For Example:
+
+    ```bash
+    APIID = "f6voilnlr2"
+    STAGE = "dev"
+    ```
+
 
 ### 2. `TokenManager` Class
 
