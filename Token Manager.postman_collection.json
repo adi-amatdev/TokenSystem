@@ -1,0 +1,584 @@
+{
+	"info": {
+		"_postman_id": "e3ed9bb2-369c-40a2-8558-0f68a201a80d",
+		"name": "Token Manager",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" width=\"2162\" height=\"1530\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24747011",
+		"_collection_link": "https://planetary-star-566836.postman.co/workspace/My-Workspace~c074028e-fd5a-445d-813a-a5defd567e03/collection/24747011-e3ed9bb2-369c-40a2-8558-0f68a201a80d?action=share&source=collection_link&creator=24747011"
+	},
+	"item": [
+		{
+			"name": "Post data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"macId\":\"1234\",\n    \"upi\":\"ngmvnl\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post?foo1=bar1",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "foo1",
+							"value": "bar1"
+						}
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/create_tokens_bulk/ngmvnl",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjE1NTYzNCwianRpIjoiNGI1OWNkNzEtMDJkZi00ODFiLWJhYzYtMDEwZjBhMmYxYzlhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VybmFtZSI6ImFhbXMxIiwicm9sZSI6IlVTRVIifSwibmJmIjoxNzIyMTU1NjM0LCJjc3JmIjoiZTIyYmI3YzktMjQ2MC00MmI0LWIwZGQtYjZkYWFkNTg3Zjg2IiwiZXhwIjoxNzIyMTU5MjM0fQ.JW_uE-ZjUI8O1LXTUCRfJ0rXq2X0nyZJj90IO6S5Tt0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csv_file",
+							"type": "file",
+							"src": "/Users/Aadi/Desktop/Enmaz/aws-test/ec2-serve/file.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/create_tokens_bulk/ngmvnl",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"create_tokens_bulk",
+						"ngmvnl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/create_token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjE1NTYzNCwianRpIjoiNGI1OWNkNzEtMDJkZi00ODFiLWJhYzYtMDEwZjBhMmYxYzlhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VybmFtZSI6ImFhbXMxIiwicm9sZSI6IlVTRVIifSwibmJmIjoxNzIyMTU1NjM0LCJjc3JmIjoiZTIyYmI3YzktMjQ2MC00MmI0LWIwZGQtYjZkYWFkNTg3Zjg2IiwiZXhwIjoxNzIyMTU5MjM0fQ.JW_uE-ZjUI8O1LXTUCRfJ0rXq2X0nyZJj90IO6S5Tt0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"macId\":\"14\",\n    \"upi\":\"6ueroe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/create_token",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"create_token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/delete_token/1234",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjE1NTYzNCwianRpIjoiNGI1OWNkNzEtMDJkZi00ODFiLWJhYzYtMDEwZjBhMmYxYzlhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VybmFtZSI6ImFhbXMxIiwicm9sZSI6IlVTRVIifSwibmJmIjoxNzIyMTU1NjM0LCJjc3JmIjoiZTIyYmI3YzktMjQ2MC00MmI0LWIwZGQtYjZkYWFkNTg3Zjg2IiwiZXhwIjoxNzIyMTU5MjM0fQ.JW_uE-ZjUI8O1LXTUCRfJ0rXq2X0nyZJj90IO6S5Tt0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"macId\":\"14\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/delete_token/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"delete_token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/delete_tokens_bulk",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjE1NTYzNCwianRpIjoiNGI1OWNkNzEtMDJkZi00ODFiLWJhYzYtMDEwZjBhMmYxYzlhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VybmFtZSI6ImFhbXMxIiwicm9sZSI6IlVTRVIifSwibmJmIjoxNzIyMTU1NjM0LCJjc3JmIjoiZTIyYmI3YzktMjQ2MC00MmI0LWIwZGQtYjZkYWFkNTg3Zjg2IiwiZXhwIjoxNzIyMTU5MjM0fQ.JW_uE-ZjUI8O1LXTUCRfJ0rXq2X0nyZJj90IO6S5Tt0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csv_file",
+							"type": "file",
+							"src": "/Users/Aadi/Desktop/Enmaz/aws-test/ec2-serve/file.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/delete_tokens_bulk",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"delete_tokens_bulk"
+					]
+				},
+				"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/sensor_list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjE1NTYzNCwianRpIjoiNGI1OWNkNzEtMDJkZi00ODFiLWJhYzYtMDEwZjBhMmYxYzlhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VybmFtZSI6ImFhbXMxIiwicm9sZSI6IlVTRVIifSwibmJmIjoxNzIyMTU1NjM0LCJjc3JmIjoiZTIyYmI3YzktMjQ2MC00MmI0LWIwZGQtYjZkYWFkNTg3Zjg2IiwiZXhwIjoxNzIyMTU5MjM0fQ.JW_uE-ZjUI8O1LXTUCRfJ0rXq2X0nyZJj90IO6S5Tt0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/sensor_list",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"sensor_list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/sensor_fetch",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjE1NTYzNCwianRpIjoiNGI1OWNkNzEtMDJkZi00ODFiLWJhYzYtMDEwZjBhMmYxYzlhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VybmFtZSI6ImFhbXMxIiwicm9sZSI6IlVTRVIifSwibmJmIjoxNzIyMTU1NjM0LCJjc3JmIjoiZTIyYmI3YzktMjQ2MC00MmI0LWIwZGQtYjZkYWFkNTg3Zjg2IiwiZXhwIjoxNzIyMTU5MjM0fQ.JW_uE-ZjUI8O1LXTUCRfJ0rXq2X0nyZJj90IO6S5Tt0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"macId\":\"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/sensor_fetch",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"sensor_fetch"
+					],
+					"query": [
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/create_usage_plan",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjE1NTYzNCwianRpIjoiNGI1OWNkNzEtMDJkZi00ODFiLWJhYzYtMDEwZjBhMmYxYzlhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VybmFtZSI6ImFhbXMxIiwicm9sZSI6IlVTRVIifSwibmJmIjoxNzIyMTU1NjM0LCJjc3JmIjoiZTIyYmI3YzktMjQ2MC00MmI0LWIwZGQtYjZkYWFkNTg3Zjg2IiwiZXhwIjoxNzIyMTU5MjM0fQ.JW_uE-ZjUI8O1LXTUCRfJ0rXq2X0nyZJj90IO6S5Tt0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"size\": 10,\n    \"description\": \"Monthly usage plan for API Gateway\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/create_usage_plan",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"create_usage_plan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/fetch_usage_plans",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/fetch_usage_plans",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"fetch_usage_plans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFhbXMxMiIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzIxNjcxNDU0fQ.nwg3fkwGh1w6XhDoEkg1SOMU39tIzMuPFmywypR7V-s",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjE1NTYzNCwianRpIjoiNGI1OWNkNzEtMDJkZi00ODFiLWJhYzYtMDEwZjBhMmYxYzlhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VybmFtZSI6ImFhbXMxIiwicm9sZSI6IlVTRVIifSwibmJmIjoxNzIyMTU1NjM0LCJjc3JmIjoiZTIyYmI3YzktMjQ2MC00MmI0LWIwZGQtYjZkYWFkNTg3Zjg2IiwiZXhwIjoxNzIyMTU5MjM0fQ.JW_uE-ZjUI8O1LXTUCRfJ0rXq2X0nyZJj90IO6S5Tt0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"aams12\",\n    \"password\":\"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/signup",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"aams1\",\n    \"password\":\"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/list_users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjE1NTYzNCwianRpIjoiNGI1OWNkNzEtMDJkZi00ODFiLWJhYzYtMDEwZjBhMmYxYzlhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VybmFtZSI6ImFhbXMxIiwicm9sZSI6IlVTRVIifSwibmJmIjoxNzIyMTU1NjM0LCJjc3JmIjoiZTIyYmI3YzktMjQ2MC00MmI0LWIwZGQtYjZkYWFkNTg3Zjg2IiwiZXhwIjoxNzIyMTU5MjM0fQ.JW_uE-ZjUI8O1LXTUCRfJ0rXq2X0nyZJj90IO6S5Tt0 ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/list_users",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"list_users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/delete_user/Money",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjE1NTYzNCwianRpIjoiNGI1OWNkNzEtMDJkZi00ODFiLWJhYzYtMDEwZjBhMmYxYzlhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VybmFtZSI6ImFhbXMxIiwicm9sZSI6IlVTRVIifSwibmJmIjoxNzIyMTU1NjM0LCJjc3JmIjoiZTIyYmI3YzktMjQ2MC00MmI0LWIwZGQtYjZkYWFkNTg3Zjg2IiwiZXhwIjoxNzIyMTU5MjM0fQ.JW_uE-ZjUI8O1LXTUCRfJ0rXq2X0nyZJj90IO6S5Tt0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/delete_user/aams12",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"delete_user",
+						"aams12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "://127.0.0.1:5000/update_role",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjE1NTYzNCwianRpIjoiNGI1OWNkNzEtMDJkZi00ODFiLWJhYzYtMDEwZjBhMmYxYzlhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VybmFtZSI6ImFhbXMxIiwicm9sZSI6IlVTRVIifSwibmJmIjoxNzIyMTU1NjM0LCJjc3JmIjoiZTIyYmI3YzktMjQ2MC00MmI0LWIwZGQtYjZkYWFkNTg3Zjg2IiwiZXhwIjoxNzIyMTU5MjM0fQ.JW_uE-ZjUI8O1LXTUCRfJ0rXq2X0nyZJj90IO6S5Tt0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"aams1\",\n    \"role\":\"MANAGER\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "://127.0.0.1:5000/update_role",
+					"protocol": "",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"update_role"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
