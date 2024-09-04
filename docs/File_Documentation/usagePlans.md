@@ -1,28 +1,92 @@
-# `usageplan.py` Documentation
+Here is a Markdown documentation for the `usageplan.py` file:
 
-## Purpose
-The `usageplan.py` module manages usage plans for the tokens in the TokenSystem project. It provides functionalities to create, update, and retrieve usage plans for different token types.
+```markdown
+# `usageplan.py`
 
-## Key Functions/Classes
+This script is designed to interact with AWS API Gateway to create a usage plan using the `boto3` library. 
 
-### `create_plan(plan_name, max_usage)`
-- **Description**: Creates a new usage plan with the specified name and maximum usage limit.
-- **Parameters**:
-  - `plan_name`: Name of the usage plan.
-  - `max_usage`: Maximum number of times the token can be used under this plan.
-- **Returns**: None
+## Prerequisites
 
-### `update_plan(plan_id, new_max_usage)`
-- **Description**: Updates the maximum usage limit for an existing usage plan.
-- **Parameters**:
-  - `plan_id`: ID of the plan to be updated.
-  - `new_max_usage`: New maximum usage limit to be set.
-- **Returns**: None
+- **AWS SDK for Python (Boto3)**: Ensure that `boto3` is installed and configured with the necessary permissions to create usage plans in API Gateway.
+- **AWS Credentials**: The script uses your AWS credentials, so make sure they are configured properly.
 
-### `get_plan_details(plan_id)`
-- **Description**: Retrieves details of a specific usage plan based on the plan ID.
-- **Parameters**:
-  - `plan_id`: ID of the plan to retrieve details for.
-- **Returns**: Dictionary containing the details of the usage plan.
+## Dependencies
 
-The `usageplan.py` module plays a crucial role in defining and managing usage plans for tokens within the TokenSystem project.
+Install the required package by running:
+
+```bash
+pip install boto3
+```
+
+## Usage
+
+### Function: `createUsagePlan`
+
+#### Description
+
+This function creates a usage plan in AWS API Gateway.
+
+#### Parameters
+
+- `name` (`str`): The name of the usage plan.
+- `description` (`str`): A description of the usage plan.
+- `apiStages` (`list`): A list of API stages to associate with the usage plan. Each item in the list should be a dictionary with keys like `apiId` and `stage`.
+- `throttleSettings` (`dict`): A dictionary specifying the request throttling limits, typically including `rateLimit` and `burstLimit`.
+- `quotaSettings` (`dict`): A dictionary specifying the request quota limits, typically including `limit`, `period`, and `offset`.
+
+#### Returns
+
+- On success: Returns the response dictionary containing the usage plan details, including the `Usage Plan ID`.
+- On failure: Returns `None` and prints an error message.
+
+#### Example
+
+```python
+import boto3
+
+# Create a boto3 client for API Gateway
+apigateway = boto3.client('apigateway')
+
+def createUsagePlan(name, description, apiStages, throttleSettings, quotaSettings):
+    try:
+        response = apigateway.create_usage_plan(
+            name=name,
+            description=description,
+            apiStages=apiStages,
+            throttle=throttleSettings,
+            quota=quotaSettings
+        )
+        print("Usage Plan Created Successfully:")
+        print(f"Usage Plan ID: {response['id']}")
+        return response
+    except Exception as e:
+        print(f"Error creating usage plan: {e}")
+        return None
+
+# Example usage
+response = createUsagePlan(
+    name="MyUsagePlan",
+    description="A usage plan for my API",
+    apiStages=[{"apiId": "abcd1234", "stage": "prod"}],
+    throttleSettings={"rateLimit": 100, "burstLimit": 200},
+    quotaSettings={"limit": 1000, "period": "MONTH", "offset": 0}
+)
+```
+
+#### Output
+
+If the usage plan is created successfully, you will see the following output:
+
+```
+Usage Plan Created Successfully:
+Usage Plan ID: <Your-Usage-Plan-ID>
+```
+
+In case of an error, the script will print the error message.
+
+## License
+
+This code is provided as-is without any warranty. You are free to use and modify it according to your needs.
+```
+
+This documentation should help users understand how to use the `usageplan.py` script and the `createUsagePlan` function effectively.
