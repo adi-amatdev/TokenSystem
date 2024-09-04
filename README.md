@@ -21,6 +21,10 @@ To run the project locally:
 ## Usage
 A simple example of how to run the project:
 `python app.py`
+
+## More Information
+For more information, refer to the [docs](docs) folder.
+
 <!--
 ## Contributing
 Contributions are welcome. Please follow the guidelines in the `CONTRIBUTING.md` file.
