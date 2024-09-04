@@ -1,8 +1,6 @@
-
-```markdown
 # `usageplan.py`
 
-This script is designed to interact with AWS API Gateway to create a usage plan using the `boto3` library. 
+This script is designed to interact with AWS API Gateway to create a usage plan using the `boto3` library.
 
 ## Prerequisites
 
@@ -15,17 +13,18 @@ Install the required package by running:
 
 ```bash
 pip install boto3
+
 ```
 
 ## Usage
 
 ### Function: `createUsagePlan`
 
-#### Description
+### Description
 
 This function creates a usage plan in AWS API Gateway.
 
-#### Parameters
+### Parameters
 
 - `name` (`str`): The name of the usage plan.
 - `description` (`str`): A description of the usage plan.
@@ -33,12 +32,12 @@ This function creates a usage plan in AWS API Gateway.
 - `throttleSettings` (`dict`): A dictionary specifying the request throttling limits, typically including `rateLimit` and `burstLimit`.
 - `quotaSettings` (`dict`): A dictionary specifying the request quota limits, typically including `limit`, `period`, and `offset`.
 
-#### Returns
+### Returns
 
 - On success: Returns the response dictionary containing the usage plan details, including the `Usage Plan ID`.
 - On failure: Returns `None` and prints an error message.
 
-#### Example
+### Example
 
 ```python
 import boto3
@@ -70,22 +69,5 @@ response = createUsagePlan(
     throttleSettings={"rateLimit": 100, "burstLimit": 200},
     quotaSettings={"limit": 1000, "period": "MONTH", "offset": 0}
 )
-```
-
-#### Output
-
-If the usage plan is created successfully, you will see the following output:
 
 ```
-Usage Plan Created Successfully:
-Usage Plan ID: <Your-Usage-Plan-ID>
-```
-
-In case of an error, the script will print the error message.
-
-## License
-
-This code is provided as-is without any warranty. You are free to use and modify it according to your needs.
-```
-
-This documentation should help users understand how to use the `usageplan.py` script and the `createUsagePlan` function effectively.
