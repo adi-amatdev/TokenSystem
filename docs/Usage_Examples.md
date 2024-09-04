@@ -364,4 +364,4 @@
   These examples demonstrate how to interact with the Token Manager API using common HTTP methods (`GET`, `POST`, `PUT`, `DELETE`) and JSON payloads. Most operations require a JWT token for authentication, ensuring that only authorized users can perform actions such as creating tokens, managing users, and setting up usage plans.
 
   For practical use, replace placeholder values like `<JWT_TOKEN>`, `macId`, `upi`, and usernames with actual data relevant to your application.
-  refer ![postman collection](Token_Manager.postman_collection.json) for testing it yourself by importing the json into postman!
+  refer [postman collection](Token_Manager.postman_collection.json) for testing it yourself by importing the json into postman!
