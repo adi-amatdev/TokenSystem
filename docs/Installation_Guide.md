@@ -30,9 +30,8 @@ Ensure you have the following software installed:
 4. **Setting up AWS-Credentials:**
     - First Install `AWS CLI` and run `aws` in your terminal to make sure it is running.
     - Run  `aws config`  and then set up the credentials as necessary.
-    - Refer : ( Refer `IAM role` in this documentation for easy set up)
-    
-    [Set up the AWS CLI - AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html)
+    - Refer : [Set up the AWS CLI - AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html)
+         ( Refer `IAM role` in this documentation for easy set up)
     
 
 ## Configuration
