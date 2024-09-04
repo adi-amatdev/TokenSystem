@@ -21,9 +21,10 @@ To run the project locally:
 ## Usage
 A simple example of how to run the project:
 `python app.py`
-
+<!--
 ## Contributing
 Contributions are welcome. Please follow the guidelines in the `CONTRIBUTING.md` file.
 
 ## License
 This project is licensed under the MIT License. See `LICENSE` for more details.
+-->
